@@ -1,0 +1,2 @@
+https://regfop5esb:h9spulsagu@unir-search-4989434682.us-east-1.bonsaisearch.net:443
+http://localhost:8762/ms-inventory-movies
