@@ -1,0 +1,813 @@
+{
+	"info": {
+		"_postman_id": "edfcba4f-6991-4b38-adad-50cc3bde3be5",
+		"name": "DWFS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Elasticsearch",
+			"item": []
+		},
+		{
+			"name": "Clase",
+			"item": [
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Crear",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"TEST\",\r\n    \"country\": \"COL\",\r\n    \"description\": \"Description\",\r\n    \"visible\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/products",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/products",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Orders",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        \"1\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/orders",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Actividad",
+			"item": [
+				{
+					"name": "Movie",
+					"item": [
+						{
+							"name": "Listar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/Movies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"Movies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/Movies/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"Movies",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Test movie\",\r\n    \"description\": \"Description movie\",\r\n    \"genre\": \"Genre movie\",\r\n    \"yearMovie\": 2023,\r\n    \"director\": \"Director movie\",\r\n    \"lengthMovie\": 120\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/Movies",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"Movies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"title\": \"Test movie 1\",\r\n    \"description\": \"Description movie\",\r\n    \"genre\": \"Genre movie\",\r\n    \"yearMovie\": 2023,\r\n    \"director\": \"Director movie\",\r\n    \"lengthMovie\": 120\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/Movies/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"Movies",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar atributo",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"lengthMovie\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/Movies/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"Movies",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Buy",
+					"item": [
+						{
+							"name": "Buy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"movies\": [\r\n        \"1\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/buy",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"buy"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Actividad 3",
+			"item": [
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Dark Knight\",\r\n    \"director\": \"Christopher Nolan\",\r\n    \"premiereYear\": 2008,\r\n    \"genre\": \"Action, Crime, Drama\",\r\n    \"actors\": \"Christian Bale, Heath Ledger, Aaron Eckhart\",\r\n    \"synopsis\": \"When the menace known as The Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.\",\r\n    \"duration\": 152,\r\n    \"language\": \"English\",\r\n    \"country\": \"United States\",\r\n    \"productionCompany\": \"Warner Bros. Pictures\",\r\n    \"rating\": \"PG-13\",\r\n    \"ratingValue\": 9.0,\r\n    \"poster\": \"https://example.com/the_dark_knight.jpg\"\r\n  }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8762/ms-inventory-movies/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8762",
+							"path": [
+								"ms-inventory-movies",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8762/ms-inventory-movies/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8762",
+							"path": [
+								"ms-inventory-movies",
+								"movies"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Shawshank",
+									"disabled": true
+								},
+								{
+									"key": "director",
+									"value": "Coppola",
+									"disabled": true
+								},
+								{
+									"key": "premiereYear",
+									"value": "1972",
+									"disabled": true
+								},
+								{
+									"key": "genre",
+									"value": "Drama",
+									"disabled": true
+								},
+								{
+									"key": "actors",
+									"value": "Brando",
+									"disabled": true
+								},
+								{
+									"key": "synopsis",
+									"value": "Two",
+									"disabled": true
+								},
+								{
+									"key": "duration",
+									"value": "175",
+									"disabled": true
+								},
+								{
+									"key": "language",
+									"value": "English",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "United States",
+									"disabled": true
+								},
+								{
+									"key": "productionCompany",
+									"value": "Paramount",
+									"disabled": true
+								},
+								{
+									"key": "rating",
+									"value": "R",
+									"disabled": true
+								},
+								{
+									"key": "ratingValue",
+									"value": "9.1",
+									"disabled": true
+								},
+								{
+									"key": "poster",
+									"value": "the_godfather.jpg",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8762/ms-inventory-movies/movies/30g21ogB8M2vRuq9oXHp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8762",
+							"path": [
+								"ms-inventory-movies",
+								"movies",
+								"30g21ogB8M2vRuq9oXHp"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Shawshank",
+									"disabled": true
+								},
+								{
+									"key": "director",
+									"value": "Coppola",
+									"disabled": true
+								},
+								{
+									"key": "premiereYear",
+									"value": "1972",
+									"disabled": true
+								},
+								{
+									"key": "genre",
+									"value": "Drama",
+									"disabled": true
+								},
+								{
+									"key": "actors",
+									"value": "Brando",
+									"disabled": true
+								},
+								{
+									"key": "synopsis",
+									"value": "Two",
+									"disabled": true
+								},
+								{
+									"key": "duration",
+									"value": "142",
+									"disabled": true
+								},
+								{
+									"key": "language",
+									"value": "English",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "United States",
+									"disabled": true
+								},
+								{
+									"key": "productionCompany",
+									"value": "Paramount",
+									"disabled": true
+								},
+								{
+									"key": "rating",
+									"value": "R",
+									"disabled": true
+								},
+								{
+									"key": "ratingValue",
+									"value": "9.2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Dark Knight111\",\r\n    \"director\": \"Christopher Nolan\",\r\n    \"premiereYear\": 2008,\r\n    \"genre\": \"Action, Crime, Drama\",\r\n    \"actors\": \"Christian Bale, Heath Ledger, Aaron Eckhart\",\r\n    \"synopsis\": \"When the menace known as The Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.\",\r\n    \"duration\": 152,\r\n    \"language\": \"English\",\r\n    \"country\": \"United States\",\r\n    \"productionCompany\": \"Warner Bros. Pictures\",\r\n    \"rating\": \"PG-13\",\r\n    \"ratingValue\": 9.0,\r\n    \"poster\": \"https://example.com/the_dark_knight.jpg\"\r\n  }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8762/ms-inventory-movies/movies/14R824gBU8zon6yuYKlq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8762",
+							"path": [
+								"ms-inventory-movies",
+								"movies",
+								"14R824gBU8zon6yuYKlq"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar parcial",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ratingValue\": 4.0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8762/ms-inventory-movies/movies/14R824gBU8zon6yuYKlq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8762",
+							"path": [
+								"ms-inventory-movies",
+								"movies",
+								"14R824gBU8zon6yuYKlq"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8762/ms-inventory-movies/movies/14R824gBU8zon6yuYKlq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8762",
+							"path": [
+								"ms-inventory-movies",
+								"movies",
+								"14R824gBU8zon6yuYKlq"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Shawshank",
+									"disabled": true
+								},
+								{
+									"key": "director",
+									"value": "Coppola",
+									"disabled": true
+								},
+								{
+									"key": "premiereYear",
+									"value": "1972",
+									"disabled": true
+								},
+								{
+									"key": "genre",
+									"value": "Drama",
+									"disabled": true
+								},
+								{
+									"key": "actors",
+									"value": "Brando",
+									"disabled": true
+								},
+								{
+									"key": "synopsis",
+									"value": "Two",
+									"disabled": true
+								},
+								{
+									"key": "duration",
+									"value": "142",
+									"disabled": true
+								},
+								{
+									"key": "language",
+									"value": "English",
+									"disabled": true
+								},
+								{
+									"key": "country",
+									"value": "United States",
+									"disabled": true
+								},
+								{
+									"key": "productionCompany",
+									"value": "Paramount",
+									"disabled": true
+								},
+								{
+									"key": "rating",
+									"value": "R",
+									"disabled": true
+								},
+								{
+									"key": "ratingValue",
+									"value": "9.2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mapping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch-host}}/movies/_mapping",
+							"host": [
+								"{{elasticsearch-host}}"
+							],
+							"path": [
+								"movies",
+								"_mapping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener varios de un Indice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch-host}}/movies/_search",
+							"host": [
+								"{{elasticsearch-host}}"
+							],
+							"path": [
+								"movies",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elasticsearch-host}}/movies/_doc/qUi_1YgB8M2vRuq9r2_-",
+							"host": [
+								"{{elasticsearch-host}}"
+							],
+							"path": [
+								"movies",
+								"_doc",
+								"qUi_1YgB8M2vRuq9r2_-"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Term Query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": {\n        \"term\": {\n            \"genre\": {\n                \"value\": \"Drama\"\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{elasticsearch-host}}/movies/_search",
+							"host": [
+								"{{elasticsearch-host}}"
+							],
+							"path": [
+								"movies",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Match Query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": {\n        \"match\": {\n            \"genre\": \"Drama\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{elasticsearch-host}}/movies/_search",
+							"host": [
+								"{{elasticsearch-host}}"
+							],
+							"path": [
+								"movies",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear favoritos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idMovie\":\"rEjX1YgB8M2vRuq9QW-3\",\r\n    \"date\": \"2023-06-20\",\r\n    \"username\": \"william\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/favorites",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar favoritos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/favorites",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorites"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "jcantillo",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete favorito",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/favorites/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorites",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
