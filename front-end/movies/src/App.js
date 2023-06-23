@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import React, { useState } from 'react';
 import './App.css';
 import "primereact/resources/themes/lara-light-indigo/theme.css";  
@@ -9,9 +8,6 @@ import { PanelMenu } from 'primereact/panelmenu';
 import MenuRouter from './router/MenuRouter';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
 
 //import { useCookies } from 'react-cookie';
 
@@ -109,7 +105,10 @@ function App() {
           <span></span>
           <span></span>
         </div>
-        <img src={logo} alt="Logo" className="logo" />
+        <div>
+          <i className="pi pi-youtube" style={{ fontSize: '4rem' }}></i>
+        </div>
+       
         {/*<div className="search-bar-container">
           <InputText className="search-bar" placeholder="Buscar" />
   </div>*/}
