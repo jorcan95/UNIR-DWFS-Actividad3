@@ -10,6 +10,9 @@ import { Toolbar } from 'primereact/toolbar';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
+import { AutoComplete } from 'primereact/autocomplete';
+import data from '../assets/genres.json';
+import 'primeflex/primeflex.css';
 
 export default function Movie() {
 
@@ -28,7 +31,7 @@ export default function Movie() {
         "rating": "",
         "ratingValue": 0,
         "poster": ""
-      }
+    }
 
     const [movies, setMovies] = useState(null);
     const [movieDialog, setMovieDialog] = useState(false);
@@ -42,6 +45,8 @@ export default function Movie() {
     const dt = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [options, setOptions] = useState([]);
+    const [selectedValue, setSelectedValue] = useState(null);
 
     useEffect(() => {
 
@@ -63,6 +68,33 @@ export default function Movie() {
         };
         fetchData();
     }, []);
+
+    useEffect(() => {
+        // Cargar las opciones desde el archivo JSON
+        setOptions(data);
+    }, []);
+
+        // Función para manejar la selección del filtro
+    const handleOptionSelect = (event, param) => {
+        console.log(event.value);
+        setSelectedValue(event.value);
+        if (event.value.name) {
+            loadOptions(event.value.name, param);
+        }
+    };
+
+    const filterData = (event) => {
+        const filteredOptions = data.filter((option) => {
+            return option.name.toLowerCase().startsWith(event.query.toLowerCase());
+        });
+        setOptions(filteredOptions);
+    };
+
+    // Función para cargar las opciones del filtro desde el servicio de películas
+    const loadOptions = async (value, param) => {
+        const response = await MovieService.getMovieParam(value, param);
+        setMovies(response);
+    };
 
     if (isLoading) {
         return <div>Cargando...</div>;
@@ -104,7 +136,7 @@ export default function Movie() {
                 const index = findIndexById(movie.id);
                 _movies[index] = _movie;
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Movie Updated', life: 3000 });
-            
+
             } else {
 
                 const idMovie = await MovieService.createMovie(movie);
@@ -112,7 +144,7 @@ export default function Movie() {
                 _movie.id = idMovie;
                 _movies.push(_movie);
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Movie Created', life: 3000 });
-            
+
             }
 
             setMovies(_movies);
@@ -126,7 +158,7 @@ export default function Movie() {
         setMovieDialog(true);
     };
 
-    
+
     const confirmDeleteMovie = (movie) => {
         setMovie(movie);
         setDeleteMovieDialog(true);
@@ -160,7 +192,7 @@ export default function Movie() {
         dt.current.exportCSV();
     };
 
-    const deleteSelectedMovies = () => { 
+    const deleteSelectedMovies = () => {
         let _movies = movies.filter((val) => !selectedMovies.includes(val));
 
         setMovies(_movies);
@@ -170,9 +202,9 @@ export default function Movie() {
     };
 
     const onInputChange = (e, name) => {
-        
+
         const val = (e.target && e.target.value) || '';
-        
+
         let _movie = { ...movie };
 
         _movie[`${name}`] = val;
@@ -192,7 +224,7 @@ export default function Movie() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="Nuevo" icon="pi pi-plus" className="mr-2" severity="success" onClick={openNew} />               
+                <Button label="Nuevo" icon="pi pi-plus" className="mr-2" severity="success" onClick={openNew} />
             </div>
         );
     };
@@ -219,12 +251,30 @@ export default function Movie() {
     };
 
     const header = (
-        <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
-            <h4 className="m-0">Administrador de películas</h4>
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
-            </span>
+        <div >
+            <h1 className="m-0">Administrador de películas</h1>
+            <div className="flex flex-wrap gap-2 align-items-center justify-content-initial">
+                <div>
+                    <h4>Palabra clave</h4>
+                    <span className="p-input-icon-left">
+                        <i className="pi pi-search" />
+                        <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
+                    </span>
+                </div>
+                <div>
+                    <h4>Seleccione un Genero</h4>
+                    <AutoComplete
+                        value={selectedValue}
+                        suggestions={options}
+                        field="name"
+                        dropdown forceSelection
+                        completeMethod={filterData}
+                        onChange={(e) => handleOptionSelect(e, 'genre')}
+                        placeholder="Seleccione una opción"
+                    />
+                </div>
+            </div>
+
         </div>
     );
     const movieDialogFooter = (
@@ -250,13 +300,13 @@ export default function Movie() {
         <div>
             <Toast ref={toast} />
             <div className="card">
-                
+
                 <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} value={movies} selection={selectedMovies} onSelectionChange={(e) => setSelectedMovies(e.value)}
-                        dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
-                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        currentPageReportTemplate="Listando {first} - {last} de {totalRecords} peliculas" globalFilter={globalFilter} header={header}>
+                    dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                    currentPageReportTemplate="Listando {first} - {last} de {totalRecords} peliculas" globalFilter={globalFilter} header={header}>
                     <Column body={actionBodyTemplate} exportable={false}></Column>
                     <Column field="poster" header="Poster" body={imageBodyTemplate}></Column>
                     <Column field="title" header="Título" sortable></Column>
@@ -269,14 +319,14 @@ export default function Movie() {
                     <Column field="language" header="Lenguaje" sortable></Column>
                     <Column field="country" header="País" sortable></Column>
                     <Column field="productionCompany" header="Compañia" sortable></Column>
-                    <Column field="rating" header="Clasificación" sortable></Column>                    
+                    <Column field="rating" header="Clasificación" sortable></Column>
                 </DataTable>
             </div>
 
             <Dialog visible={movieDialog} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Movie Details" modal className="p-fluid" footer={movieDialogFooter} onHide={hideDialog}>
                 <div className="field">
                     <label htmlFor="title" className="font-bold">
-                       Título
+                        Título
                     </label>
                     <InputText id="title" name="title" value={movie.title} onChange={(e) => onInputChange(e, 'title')} required autoFocus className={classNames({ 'p-invalid': submitted && !movie.title })} />
                     {submitted && !movie.title && <small className="p-error">Título es requiredo.</small>}
@@ -292,7 +342,7 @@ export default function Movie() {
                     <label htmlFor="premiereYear" className="font-bold">
                         Año
                     </label>
-                    <InputNumber id="premiereYear" name="premiereYear" value={movie.premiereYear} onValueChange={(e) => onInputNumberChange(e, 'premiereYear')} required autoFocus className={classNames({ 'p-invalid': submitted && !movie.premiereYear })}/>
+                    <InputNumber id="premiereYear" name="premiereYear" value={movie.premiereYear} onValueChange={(e) => onInputNumberChange(e, 'premiereYear')} required autoFocus className={classNames({ 'p-invalid': submitted && !movie.premiereYear })} />
                     {submitted && !movie.premiereYear && <small className="p-error">Año es requiredo.</small>}
                 </div>
                 <div className="field">
@@ -320,7 +370,7 @@ export default function Movie() {
                     <label htmlFor="duration" className="font-bold">
                         Duración
                     </label>
-                    <InputNumber id="duration" name="duration" value={movie.duration} onValueChange={(e) => onInputNumberChange(e, 'duration')} required autoFocus className={classNames({ 'p-invalid': submitted && !movie.duration })}/>
+                    <InputNumber id="duration" name="duration" value={movie.duration} onValueChange={(e) => onInputNumberChange(e, 'duration')} required autoFocus className={classNames({ 'p-invalid': submitted && !movie.duration })} />
                     {submitted && !movie.duration && <small className="p-error">Duración es requiredo.</small>}
                 </div>
                 <div className="field">
@@ -355,7 +405,7 @@ export default function Movie() {
                     <label htmlFor="ratingValue" className="font-bold">
                         Calificación
                     </label>
-                    <InputNumber id="ratingValue" name="ratingValue" value={movie.ratingValue} onValueChange={(e) => onInputNumberChange(e, 'ratingValue')} required autoFocus className={classNames({ 'p-invalid': submitted && !movie.ratingValue })}/>
+                    <InputNumber id="ratingValue" name="ratingValue" value={movie.ratingValue} onValueChange={(e) => onInputNumberChange(e, 'ratingValue')} required autoFocus className={classNames({ 'p-invalid': submitted && !movie.ratingValue })} />
                     {submitted && !movie.ratingValue && <small className="p-error">Calificación es requiredo.</small>}
                 </div>
                 <div className="field">
@@ -364,7 +414,7 @@ export default function Movie() {
                     </label>
                     <InputText id="poster" name="poster" value={movie.poster} onChange={(e) => onInputChange(e, 'poster')} required autoFocus className={classNames({ 'p-invalid': submitted && !movie.poster })} />
                     {submitted && !movie.poster && <small className="p-error">Poster es requiredo.</small>}
-                </div>                
+                </div>
             </Dialog>
 
             <Dialog visible={deleteMovieDialog} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirmación" modal footer={deleteMovieDialogFooter} onHide={hideDeleteMovieDialog}>

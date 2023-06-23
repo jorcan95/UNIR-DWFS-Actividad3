@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Chinese"
+    },
+    {
+        "id": 2,
+        "name": "Spanish"
+    },
+    {
+        "id":  3,
+        "name": "English"
+    },
+    {
+        "id": 4,
+        "name": "Arabic"
+    },
+    {
+        "id": 5,
+        "name": "Hindi"
+    },
+    {
+        "id": 6,
+        "name": "Bengali"
+    },
+    {
+        "id": 7,
+        "name": "Portuguese"
+    },
+    {
+        "id": 8,
+        "name": "Russian"
+    },
+    {
+        "id": 9,
+        "name": "Japanese"
+    },
+    {
+        "id": 10,
+        "name": "Lahnda"
+    }
+]
