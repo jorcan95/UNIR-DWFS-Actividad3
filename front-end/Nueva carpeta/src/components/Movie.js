@@ -5,13 +5,30 @@ import { Column } from 'primereact/column';
 import { MovieService } from '../service/MovieService';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
+//import { FileUpload } from 'primereact/fileupload';
 import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
+//import { InputTextarea } from 'primereact/inputtextarea';
+//import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
+//import { Tag } from 'primereact/tag';
+
+//import { useNavigate } from "react-router-dom";
+
 
 export default function Movie() {
+/*
+    const { data, isLoading, error } = UseApi('http://localhost:8762/ms-inventory-movies/movies');
+
+    if (isLoading) {
+        return <div>Cargando...</div>;
+    }
+
+    if (error) {
+        return <div>Ocurrió un error: {error}</div>;
+    }*/
 
     let emptyMovie = {
         "id": null,
@@ -40,21 +57,26 @@ export default function Movie() {
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
+
+    //const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    //const navigate = useNavigate();
     useEffect(() => {
+        //navigate('/index');
 
         MovieService.getMovie();
+
         const fetchData = async () => {
             setIsLoading(true);
             try {
                 const response = await fetch(process.env.REACT_APP_API_MOVIE);
                 if (response.ok) {
-                    const json = await response.json();
-                    setMovies(json);
+                const json = await response.json();
+                setMovies(json);
                 } else {
-                    setError('Error al obtener los datos');
+                setError('Error al obtener los datos');
                 }
             } catch (error) {
                 setError('Error de conexión');
@@ -71,6 +93,43 @@ export default function Movie() {
     if (error) {
         return <div>Ocurrió un error: {error}</div>;
     }
+/*
+    useEffect(() => {
+        //const { data, isLoading, error } = UseApi('http://localhost:8762/ms-inventory-movies/movies');
+        //setMovies([]);
+       //MovieService.getMoviesData().then((data) => setMovies(data));
+       setMovies(
+        [
+            {
+                id: '1000',
+                code: 'f230fh0g3',
+                name: 'Bamboo Watch',
+                description: 'Movie Description',
+                image: 'bamboo-watch.jpg',
+                price: 65,
+                category: 'Accessories',
+                quantity: 24,
+                inventoryStatus: 'INSTOCK',
+                //rating: 5,
+                "title": "The Shawshank Redemption",
+                "director": "Frank Darabont",
+                "premiereYear": 1994,
+                "genre": "Drama",
+                "actors": "Tim Robbins, Morgan Freeman, Bob Gunton",
+                "synopsis": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                "duration": 142,
+                "language": "English",
+                "country": "United States",
+                "productionCompany": "Castle Rock Entertainment",
+                "rating": "2",
+                "ratingValue": 4,
+                "poster": "https://t4.ftcdn.net/jpg/03/16/68/69/360_F_316686992_OvCTP1wfazJhBeMrBBDUGooufSmj2O8G.jpg"
+            }
+        ]
+       );
+    }, []);*/
+/*
+    */
 
     const openNew = () => {
         setMovie(emptyMovie);
@@ -110,6 +169,11 @@ export default function Movie() {
                 const idMovie = await MovieService.createMovie(movie);
                 console.log(idMovie);
                 _movie.id = idMovie;
+                
+                /*
+                _movie.id = createId();
+                _movie.image = 'movie-placeholder.svg';
+                */
                 _movies.push(_movie);
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Movie Created', life: 3000 });
             
@@ -155,10 +219,25 @@ export default function Movie() {
 
         return index;
     };
+    /*
+    const createId = () => {
+        let id = '';
+        let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        for (let i = 0; i < 5; i++) {
+            id += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        return id;
+    };*/
 
     const exportCSV = () => {
         dt.current.exportCSV();
     };
+/*
+    const confirmDeleteSelected = () => {
+        setDeleteMoviesDialog(true);
+    };*/
 
     const deleteSelectedMovies = () => { 
         let _movies = movies.filter((val) => !selectedMovies.includes(val));
@@ -168,6 +247,13 @@ export default function Movie() {
         setSelectedMovies(null);
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Movies Deleted', life: 3000 });
     };
+/*
+    const onCategoryChange = (e) => {
+        let _movie = { ...movie };
+
+        _movie['category'] = e.value;
+        setMovie(_movie);
+    };*/
 
     const onInputChange = (e, name) => {
         
@@ -192,7 +278,8 @@ export default function Movie() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="Nuevo" icon="pi pi-plus" className="mr-2" severity="success" onClick={openNew} />               
+                <Button label="Nuevo" icon="pi pi-plus" className="mr-2" severity="success" onClick={openNew} />
+                {/*<Button label="Eliminar" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedMovies || !selectedMovies.length} />*/}
             </div>
         );
     };
@@ -204,10 +291,18 @@ export default function Movie() {
     const imageBodyTemplate = (rowData) => {
         return <img src={`${rowData.poster}`} alt={rowData.image} className="shadow-2 border-round mini-img-table" />;
     };
+/*
+    const priceBodyTemplate = (rowData) => {
+        return formatCurrency(rowData.price);
+    };*/
 
     const ratingBodyTemplate = (rowData) => {
         return <Rating value={rowData.ratingValue} readOnly cancel={false} />;
     };
+/*
+    const statusBodyTemplate = (rowData) => {
+        return <Tag value={rowData.inventoryStatus} severity={getSeverity(rowData)}></Tag>;
+    };*/
 
     const actionBodyTemplate = (rowData) => {
         return (
@@ -217,6 +312,22 @@ export default function Movie() {
             </React.Fragment>
         );
     };
+/*
+    const getSeverity = (movie) => {
+        switch (movie.inventoryStatus) {
+            case 'INSTOCK':
+                return 'success';
+
+            case 'LOWSTOCK':
+                return 'warning';
+
+            case 'OUTOFSTOCK':
+                return 'danger';
+
+            default:
+                return null;
+        }
+    };*/
 
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
@@ -257,6 +368,8 @@ export default function Movie() {
                         dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Listando {first} - {last} de {totalRecords} peliculas" globalFilter={globalFilter} header={header}>
+                    
+                    {/*<Column selectionMode="multiple" exportable={false}></Column>*/}
                     <Column body={actionBodyTemplate} exportable={false}></Column>
                     <Column field="poster" header="Poster" body={imageBodyTemplate}></Column>
                     <Column field="title" header="Título" sortable></Column>
@@ -269,7 +382,8 @@ export default function Movie() {
                     <Column field="language" header="Lenguaje" sortable></Column>
                     <Column field="country" header="País" sortable></Column>
                     <Column field="productionCompany" header="Compañia" sortable></Column>
-                    <Column field="rating" header="Clasificación" sortable></Column>                    
+                    <Column field="rating" header="Clasificación" sortable></Column>
+                    
                 </DataTable>
             </div>
 
@@ -364,7 +478,8 @@ export default function Movie() {
                     </label>
                     <InputText id="poster" name="poster" value={movie.poster} onChange={(e) => onInputChange(e, 'poster')} required autoFocus className={classNames({ 'p-invalid': submitted && !movie.poster })} />
                     {submitted && !movie.poster && <small className="p-error">Poster es requiredo.</small>}
-                </div>                
+                </div>
+                
             </Dialog>
 
             <Dialog visible={deleteMovieDialog} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirmación" modal footer={deleteMovieDialogFooter} onHide={hideDeleteMovieDialog}>

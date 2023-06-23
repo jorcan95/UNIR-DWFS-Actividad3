@@ -1,9 +1,10 @@
 import React from "react";
+//import { Index } from "../components/Index";
 import Movie from '../components/Movie';
 import { NotFound } from "../components/NotFound";
-import { Detail } from "../components/Detail";
+import { Detail } from "../components/Detail/Detail";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Search from "../components/Search";
+import Search from "../components/Search/Search";
 
 function MenuRouter(){
   return (
