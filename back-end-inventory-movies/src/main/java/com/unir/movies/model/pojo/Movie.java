@@ -24,7 +24,7 @@ public class Movie {
 	@Id
 	private String id;
 	
-	@Field(type = FieldType.Text, name = "title")
+	@Field(type = FieldType.Search_As_You_Type, name = "title")
 	private String title;
 	
 	@Field(type = FieldType.Text, name = "director")
@@ -33,7 +33,7 @@ public class Movie {
 	@Field(type = FieldType.Integer, name = "premiereYear")
 	private Integer premiereYear;
 	
-	@Field(type = FieldType.Text, name = "genre")
+	@Field(type = FieldType.Keyword, name = "genre")
 	private String genre;
 	
 	@Field(type = FieldType.Text, name = "actors")

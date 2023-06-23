@@ -18,10 +18,10 @@ eureka:
 
 ##Elasticsearch config
 elasticsearch:
-  host: ${ELASTICSEARCH_HOST:unir-search-4989434682.us-east-1.bonsaisearch.net}
+  host: ${ELASTICSEARCH_HOST:unir-4640325742.us-east-1.bonsaisearch.net}
   credentials:
-    user: ${ELASTICSEARCH_USER:regfop5esb}
-    password: ${ELASTICSEARCH_PWD:h9spulsagu}
+    user: ${ELASTICSEARCH_USER:7bjt7g0sg6}
+    password: ${ELASTICSEARCH_PWD:z1a0tm7zba}
 logging:
   level:
     tracer: TRACE

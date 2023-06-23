@@ -48,7 +48,7 @@ public class MoviesServiceImpl implements MoviesService{
 	@Override
 	public List<Movie> getMovies(Movie movie, Boolean aggregate) {
 		//Ahora por defecto solo devolvera productos visibles
-		List<Movie> movies = repository.findProducts(movie, aggregate);
+		List<Movie> movies = repository.findMovies(movie, aggregate);
 		return movies.isEmpty() ? null : movies;
 	}
 	

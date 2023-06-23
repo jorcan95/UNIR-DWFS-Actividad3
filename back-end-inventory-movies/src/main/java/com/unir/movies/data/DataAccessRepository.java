@@ -31,17 +31,18 @@ public class DataAccessRepository {
 	private final ElasticsearchOperations elasticClient;
 
 	private final String[] synopsisSearchFields = { "synopsis", "synopsis._2gram", "synopsis._3gram" };
+	private final String[] titleSearchFields = { "title", "title._2gram", "title._3gram" };
 
 	public Movie save(Movie movie) {
 		return movieRepository.save(movie);
 	}	
 
-	public List<Movie> findProducts(Movie movie, Boolean aggregate) {
+	public List<Movie> findMovies(Movie movie, Boolean aggregate) {
 
 		BoolQueryBuilder querySpec = QueryBuilders.boolQuery();
 
 		if (!StringUtils.isEmpty(movie.getTitle())) {
-			querySpec.must(QueryBuilders.matchQuery("title", movie.getTitle()));
+			querySpec.must(QueryBuilders.multiMatchQuery(movie.getTitle(), titleSearchFields).type(Type.BOOL_PREFIX));
 		}
 
 		if (!StringUtils.isEmpty(movie.getDirector())) {

@@ -43,6 +43,17 @@ function App() {
       url: '/'
     },
     {
+      label: 'Busqueda',
+      icon: 'pi pi-search',
+      command: () => {
+        // Lógica para ir a la página de inicio        
+        setActiveItem('Inicio');
+        setShowSidebar(false);
+        
+      },
+      url: '/search'
+    },
+    {
       label: 'Usuarios',
       icon: 'pi pi-users',
       items: [
@@ -58,6 +69,7 @@ function App() {
         },        
       ]
     },
+    
     {
       label: 'Configuración',
       icon: 'pi pi-cog',
@@ -95,9 +107,9 @@ function App() {
           <span></span>
         </div>
         <img src={logo} alt="Logo" className="logo" />
-        <div className="search-bar-container">
+        {/*<div className="search-bar-container">
           <InputText className="search-bar" placeholder="Buscar" />
-        </div>
+  </div>*/}
       </div>
       <div className="content">
         <div className={`sidebar ${showSidebar ? 'active' : ''}`}>
