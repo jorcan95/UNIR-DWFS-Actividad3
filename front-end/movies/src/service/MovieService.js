@@ -11,18 +11,18 @@ export const MovieService = {
           }
     },
 
-    getMovie() {
+    async getMovieParam(value, param) {
         try {
-            const respuesta = axios.get(process.env.REACT_APP_API_MOVIE);
+            const respuesta = await axios.get(process.env.REACT_APP_API_MOVIE+'?'+param+'='+value);
             return respuesta.data;
         } catch (error) {
             console.error('Error al consumir el servicio web:', error);
         }
     },
 
-    async getMovieById(id) {
+    getMovie() {
         try {
-            const respuesta = await axios.get(process.env.REACT_APP_API_MOVIE + '/' + id);
+            const respuesta = axios.get(process.env.REACT_APP_API_MOVIE);
             return respuesta.data;
         } catch (error) {
             console.error('Error al consumir el servicio web:', error);
