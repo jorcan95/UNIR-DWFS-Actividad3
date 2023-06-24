@@ -35,7 +35,7 @@ public class FavoriteController {
 	  if(request != null && favorite != null) {
 	    return ResponseEntity.status(HttpStatus.SC_CREATED).body(favorite);
 	  } else {
-	    return ResponseEntity.badRequest().build();
+	    return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(favorite);
 	  }
 		
 	}

@@ -10,8 +10,6 @@ import { Toolbar } from 'primereact/toolbar';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-import { AutoComplete } from 'primereact/autocomplete';
-import data from '../assets/genres.json';
 import 'primeflex/primeflex.css';
 
 export default function Movie() {
@@ -45,8 +43,6 @@ export default function Movie() {
     const dt = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [options, setOptions] = useState([]);
-    const [selectedValue, setSelectedValue] = useState(null);
 
     useEffect(() => {
 
@@ -68,33 +64,6 @@ export default function Movie() {
         };
         fetchData();
     }, []);
-
-    useEffect(() => {
-        // Cargar las opciones desde el archivo JSON
-        setOptions(data);
-    }, []);
-
-        // Función para manejar la selección del filtro
-    const handleOptionSelect = (event, param) => {
-        console.log(event.value);
-        setSelectedValue(event.value);
-        if (event.value.name) {
-            loadOptions(event.value.name, param);
-        }
-    };
-
-    const filterData = (event) => {
-        const filteredOptions = data.filter((option) => {
-            return option.name.toLowerCase().startsWith(event.query.toLowerCase());
-        });
-        setOptions(filteredOptions);
-    };
-
-    // Función para cargar las opciones del filtro desde el servicio de películas
-    const loadOptions = async (value, param) => {
-        const response = await MovieService.getMovieParam(value, param);
-        setMovies(response);
-    };
 
     if (isLoading) {
         return <div>Cargando...</div>;
@@ -261,7 +230,7 @@ export default function Movie() {
                         <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
                     </span>
                 </div>
-                <div>
+                {/*<div>
                     <h4>Seleccione un Genero</h4>
                     <AutoComplete
                         value={selectedValue}
@@ -272,7 +241,8 @@ export default function Movie() {
                         onChange={(e) => handleOptionSelect(e, 'genre')}
                         placeholder="Seleccione una opción"
                     />
-                </div>
+                </div> */}
+                
             </div>
 
         </div>

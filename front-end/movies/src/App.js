@@ -51,7 +51,7 @@ function App() {
         
       },
       url: '/search'
-    },*/
+    },
     {
       label: 'Filtros',
       icon: 'pi pi-search',
@@ -67,7 +67,7 @@ function App() {
           url: '/filter'
         },        
       ]
-    },
+    },*/
     
     {
       label: 'Configuración',

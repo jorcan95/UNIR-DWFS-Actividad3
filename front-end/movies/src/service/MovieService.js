@@ -11,6 +11,25 @@ export const MovieService = {
           }
     },
 
+    async getMovieQueryParam(QueryParam) {        
+        const cleanedObj = {};
+        for (let key in QueryParam.params) {
+            const value = QueryParam.params[key];
+            if (value !== null && value !== "" && value !== 0) {
+               cleanedObj[key] = value;
+            }
+        }
+        const params = {
+            params: cleanedObj
+        }
+        try {
+            const respuesta = await axios.get(process.env.REACT_APP_API_MOVIE, params);
+            return respuesta.data;
+        } catch (error) {
+            console.error('Error al consumir el servicio web:', error);
+        }
+    },
+
     async getMovieParam(value, param) {
         try {
             const respuesta = await axios.get(process.env.REACT_APP_API_MOVIE+'?'+param+'='+value);
@@ -23,6 +42,15 @@ export const MovieService = {
     getMovie() {
         try {
             const respuesta = axios.get(process.env.REACT_APP_API_MOVIE);
+            return respuesta.data;
+        } catch (error) {
+            console.error('Error al consumir el servicio web:', error);
+        }
+    },
+
+    async getMovieById(id) {
+        try {
+            const respuesta = await axios.get(process.env.REACT_APP_API_MOVIE + '/' + id);
             return respuesta.data;
         } catch (error) {
             console.error('Error al consumir el servicio web:', error);

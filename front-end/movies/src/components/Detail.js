@@ -76,7 +76,7 @@ export const Detail = () => {
           <h1>{movie?.title}</h1>
           <p><b>Genero:</b> {`${movie?.genre}`}</p>
           <p><b>Año:</b> {`${movie?.premiereYear}`}</p>
-          <p><b>Año:</b> {`${movie?.director}`}</p>
+          <p><b>Director:</b> {`${movie?.director}`}</p>
           <p><b>Sinopsis:</b> {movie?.synopsis}</p> 
           <p>
           { showAdd && <Button label="Favorito" icon="pi pi-plus" iconPos="right" onClick={addFavorite}/> }

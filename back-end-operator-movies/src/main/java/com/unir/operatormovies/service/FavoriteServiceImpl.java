@@ -24,16 +24,17 @@ public class FavoriteServiceImpl implements FavoriteService {
 	@Override
 	public Favorite registerFavorite(FavoriteRequest request) {
 		Movie movie = movieFacade.getMovie(request.getIdMovie());
-		if(movie.getId().equals(request.getIdMovie())) {
-			Favorite favorite = Favorite.builder()
-			.idMovie(request.getIdMovie())
-			.date(request.getDate())
-			.username(request.getUsername())
-			.build();
-			return repository.save(favorite);
-		}else {
-			return null;
+		if (movie != null) {
+			if(movie.getId().equals(request.getIdMovie())) {
+				Favorite favorite = Favorite.builder()
+				.idMovie(request.getIdMovie())
+				.date(request.getDate())
+				.username(request.getUsername())
+				.build();
+				return repository.save(favorite);
+			}
 		}
+		return null;		
 	}
 
 	@Override
