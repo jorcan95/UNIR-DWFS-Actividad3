@@ -9,4 +9,6 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long>{
 	
 	List<Favorite> findByUsername(String username);
 
+	Favorite findByIdMovieAndUsername(String idMovie, String username);
+
 }

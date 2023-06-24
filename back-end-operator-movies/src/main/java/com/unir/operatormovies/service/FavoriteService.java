@@ -11,6 +11,8 @@ public interface FavoriteService {
 	
 	List<Favorite> getFavorites(String username);
 	
+	Favorite getFavoriteByIdMovieAndUsername(String idMovie, String username);
+	
 	Boolean removefavorite(Long favoriteId);
 	
 }

@@ -47,6 +47,11 @@ public class FavoriteServiceImpl implements FavoriteService {
 		}
 		return favorites;
 	}
+	
+	@Override
+	public Favorite getFavoriteByIdMovieAndUsername(String idMovie, String username) {
+		return repository.findByIdMovieAndUsername(idMovie, username);
+	}
 
 	@Override
 	public Boolean removefavorite(Long favoriteId) {
@@ -57,6 +62,8 @@ public class FavoriteServiceImpl implements FavoriteService {
 		} else {
 			return Boolean.FALSE;
 		}
-	}	
+	}
+
+		
 
 }

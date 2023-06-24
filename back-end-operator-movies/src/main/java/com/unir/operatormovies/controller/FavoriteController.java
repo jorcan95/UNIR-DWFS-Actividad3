@@ -31,13 +31,18 @@ public class FavoriteController {
 
 	@PostMapping("/favorites")
 	public ResponseEntity<Favorite> registerFavorite(@RequestBody FavoriteRequest request) {
-	  Favorite favorite = service.registerFavorite(request);
-	  if(request != null && favorite != null) {
-	    return ResponseEntity.status(HttpStatus.SC_CREATED).body(favorite);
-	  } else {
-	    return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(favorite);
-	  }
-		
+	
+      Favorite favoriteExist = service.getFavoriteByIdMovieAndUsername(request.getIdMovie(), request.getUsername());
+      if(request != null && favoriteExist != null) {
+    	  return ResponseEntity.status(HttpStatus.SC_CONFLICT).body(null);	  
+      }else {
+    	  Favorite favorite = service.registerFavorite(request);
+    	  if(favorite != null) {
+    	    return ResponseEntity.status(HttpStatus.SC_CREATED).body(favorite);
+    	  } else {
+    	    return ResponseEntity.status(HttpStatus.SC_NOT_FOUND).body(favorite);
+    	  }
+      }		
 	}
 	
 	@GetMapping("/favorites")
